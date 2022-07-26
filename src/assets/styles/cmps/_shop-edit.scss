@@ -1,0 +1,15 @@
+.shop-edit {
+    padding: 10px;
+    height: 100vh;
+    background-color: $clr2;
+    align-items: center;
+
+    .form-wrapper {
+        height: 50%;
+        width: 50%;
+
+        input {
+            margin-top: 10px;
+        }
+    }
+}

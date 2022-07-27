@@ -14,7 +14,7 @@ export const HomePage = () => {
         const user = userService.getLoggedinUser() //paramsId
         console.log(user)
         if (user) {
-            navigate('/contact')
+            navigate('/user')
         }
     }
 

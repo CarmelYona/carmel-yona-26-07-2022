@@ -1,5 +1,5 @@
-import { MainApp } from "./pages/contact-app"
-import { ContactEdit } from "./pages/contact-edit"
+import { MainApp } from "./pages/user-app"
+import { UserEdit } from "./pages/user-edit"
 import { HomePage } from "./pages/home-page"
 import { Login } from "./pages/login"
 import { Signup } from "./pages/signup"
@@ -17,11 +17,11 @@ export default [
         element: <Signup />
     },
     {
-        path: '/contact',
+        path: '/user',
         element: <MainApp />
     },
     {
-        path: '/contact/edit',
-        element: <ContactEdit />
+        path: '/user/edit/:_id',
+        element: <UserEdit />
     },
 ]

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { loadUsers, removeUser } from '../store/action/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { ContactList } from '../cmps/contact-list'
+import { UserList } from '../cmps/user-list'
 import { Link } from 'react-router-dom'
 
 export const MainApp = () => {
@@ -16,7 +16,7 @@ export const MainApp = () => {
         await dispatch(loadUsers())
     }
 
-    const onRemoveContact = async (userId) => {
+    const onRemoveUser = async (userId) => {
         await dispatch(removeUser(userId))
     }
 
@@ -24,9 +24,9 @@ export const MainApp = () => {
     if (!users) return <div>loading...</div>
     return <section className="main-app flex column pad-10x">
         <div className="app-container flex column pad-10x">
-            <h1>Contacts</h1>
-            <Link to='/contact/edit'>Add User</Link>
-            <ContactList contacts={users} onRemoveContact={onRemoveContact} />
+            <h1>Users</h1>
+            <Link to='/user/edit'>Add User</Link>
+            <UserList users={users} onRemoveUser={onRemoveUser} />
         </div>
     </section>
 }

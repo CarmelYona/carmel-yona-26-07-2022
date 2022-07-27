@@ -28,7 +28,7 @@ export function _Login() {
         }
         await dispatch(onLogin(credentials))
         // const boards = await boardService.query()
-        navigate('/contact')
+        navigate('/user')
     };
 
     return (

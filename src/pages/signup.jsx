@@ -43,7 +43,7 @@ export function _Signup() {
         console.log(newUser)
         // const boards = await boardService.query()
         if (newUser) {
-            navigate('/contact')
+            navigate('/user')
         }
     }
 

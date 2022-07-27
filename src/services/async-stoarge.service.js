@@ -1,5 +1,4 @@
-const gMovies = require('../data/shop.json')
-import requests from './requests'
+const gContacts = require('../data/contact.json')
 export const storageService = {
     query,
     get,
@@ -10,7 +9,7 @@ export const storageService = {
 }
 
 function query(entityType, delay = 100) {
-    let defaultEntity = gMovies  // for develop
+    let defaultEntity = gContacts  // for develop
     let dataFromStorage = (JSON.parse(localStorage.getItem(entityType)))
     dataFromStorage = (!dataFromStorage || dataFromStorage[0]) ? dataFromStorage : null
     var entities = dataFromStorage || defaultEntity
@@ -32,7 +31,7 @@ function post(entityType, newEntity) {
     newEntity._id = newEntity._id || _makeId()//this condition is for update a new demo user 
     return query(entityType)
         .then(entities => {
-            entities = newEntity
+            entities.push(newEntity)
             _save(entityType, entities)
             return newEntity
         })

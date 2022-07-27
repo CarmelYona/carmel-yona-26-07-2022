@@ -1,0 +1,19 @@
+.app-header {
+  height: 5vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: $clr2;
+  border-radius: 4px;
+
+  h1 {
+    color: $clr1;
+  }
+
+  .nav-links-wrapper {
+    width: 35%;
+    justify-content: space-between;
+    font-size: 0.893rem;
+  }
+
+}

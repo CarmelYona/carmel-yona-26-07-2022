@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { loadUser, onUpdateUser } from "../store/action/user.actions"
+import { loadUser, onUpdateUser, onAddUser } from "../store/action/user.actions"
 
 export const UserEdit = () => {
     const params = useParams()
@@ -16,7 +16,7 @@ export const UserEdit = () => {
     const onLoadUser = async () => {
         const { _id } = params
         console.log(params)
-        if (_id) {
+        if (_id !== 'add') {
             const user = await dispatch(loadUser(_id))
             setUser(user)
         } else {
@@ -31,7 +31,11 @@ export const UserEdit = () => {
 
     const onSubmit = async (ev) => {
         ev.preventDefault()
-        await dispatch(onUpdateUser(user))
+        if (params._id !== 'add') {
+            await dispatch(onUpdateUser(user))
+        } else {
+            await dispatch(onAddUser(user))
+        }
         navigate('/user')
     }
 
@@ -41,12 +45,16 @@ export const UserEdit = () => {
         setUser({ ...user, [field]: val })
     }
     return <section className="edit-user">
-        {<h1> edit user</h1>}
-        {user?.fullname && <h1>{user.fullname}</h1>}
-        {user?.email && <h1>{user.email}</h1>}
-        <form onSubmit={onSubmit} className="flex ">
+        <h1> edit user</h1>
+        {user?._id && <h1>{user.fullname}</h1>}
+        {user?._id && <h1>{user.email}</h1>}
+        <form onSubmit={onSubmit} className="flex column">
             <input onChange={handelChange} type="text" name="fullname" placeholder="Full Name" value={user?.fullname} id="" />
             <input onChange={handelChange} type="text" name="email" placeholder="Email" value={user?.email} id="" />
+            <input onChange={handelChange} type="text" name="username" placeholder="User Name" value={user?.username} id="" />
+            {!user?._id &&
+                <input onChange={handelChange} type="number" name="password" placeholder="Password" value={user?.password} id="" />
+            }
             <button>Save</button>
         </form>
         <Link to="/user">Back</Link>

@@ -8,7 +8,7 @@ export function App() {
         <Router>
             <AppHeader />
             <Routes>
-                {routs.map(route => <Route path={route.path} element={route.element} key={route.path} />)}
+                {routs.map(route => <Route exact path={route.path} element={route.element} key={route.path} />)}
             </Routes>
         </Router>
     )

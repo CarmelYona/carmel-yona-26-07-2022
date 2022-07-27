@@ -25,7 +25,7 @@ export const MainApp = () => {
     return <section className="main-app flex column pad-10x">
         <div className="app-container flex column pad-10x">
             <h1>Users</h1>
-            <Link to='/user/edit'>Add User</Link>
+            <Link to='/user/edit/add'>Add User</Link>
             <UserList users={users} onRemoveUser={onRemoveUser} />
         </div>
     </section>

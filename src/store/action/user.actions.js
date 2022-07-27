@@ -53,6 +53,21 @@ export function onSignup(credentials) {
         }
     }
 }
+
+export function onAddUser(credentials) {
+    return async (dispatch) => {
+        try {
+            const user = await userService.addUser(credentials)
+            dispatch({
+                type: 'ADD_USER',
+                user
+            })
+        } catch (err) {
+            console.log('Cannot add user', err)
+        }
+    }
+}
+
 export function onUpdateUser(user) {
     return async (dispatch) => {
         try {

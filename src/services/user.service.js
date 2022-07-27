@@ -11,6 +11,7 @@ export const userService = {
     getUsers,
     remove,
     update,
+    addUser,
     getById
 }
 
@@ -29,7 +30,6 @@ function remove(userId) {
 }
 
 async function update(user) {
-    console.log(user)
     const savedUser = await httpService.put(`user/${user._id}`, user)
     if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
     return savedUser;
@@ -45,9 +45,12 @@ async function login(userCred) {
     if (user) return saveLocalUser(user)
 }
 async function signup(userCred) {
-    console.log(userCred)
     const user = await httpService.post('auth/signup', userCred)
     return saveLocalUser(user)
+}
+async function addUser(userCred) {
+    console.log(userCred)
+    return await httpService.post('auth/signup', userCred)
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)

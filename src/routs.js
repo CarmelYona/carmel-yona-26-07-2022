@@ -21,7 +21,7 @@ export default [
         element: <MainApp />
     },
     {
-        path: '/contact/edit/:_id',
+        path: '/contact/edit',
         element: <ContactEdit />
     },
 ]

@@ -1,8 +1,5 @@
-import { storageService } from './async-stoarge.service'
 import { httpService } from './http.service.js'
-import axios from 'axios'
 
-const STORAGE_KEY = 'userDB'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'http://localhost:3030/api/auth'
 
@@ -19,8 +16,12 @@ export const userService = {
 
 window.us = userService
 
-function getUsers() {
-    return httpService.get(`user`)
+async function getUsers() {
+    const loggedinUser = getLoggedinUser()
+    let users = await httpService.get(`user`)
+    console.log(users)
+    users = users.filter(user => user.username !== loggedinUser.username)
+    return users
 }
 
 function remove(userId) {
@@ -44,6 +45,7 @@ async function login(userCred) {
     if (user) return saveLocalUser(user)
 }
 async function signup(userCred) {
+    console.log(userCred)
     const user = await httpService.post('auth/signup', userCred)
     return saveLocalUser(user)
 }

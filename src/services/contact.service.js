@@ -1,9 +1,4 @@
-'use strict'
-
-import { storageService } from '../services/async-stoarge.service'
-
-const STORAGE_KEY = 'contactsDB'
-
+import { httpService } from './http.service.js'
 export const contactService = {
     query,
     getById,
@@ -13,30 +8,24 @@ export const contactService = {
 }
 
 async function query() {
-    var contacts = await storageService.query(STORAGE_KEY)
-    console.log(contacts)
-    if (!contacts || !contacts.length) {
-        contacts = _createDefaultContacts()
-        console.log(contacts)
-        await storageService.insert(STORAGE_KEY, contacts)
-    }
+    let contacts = await httpService.get('user')
     return contacts
 }
 
 async function getById(contactId) {
-    return await storageService.get(STORAGE_KEY, contactId)
+    return await httpService.get(`contact/${contactId}`)
 }
 
-async function remove(id) {
-    return await storageService.remove(STORAGE_KEY, id)
+async function remove(contactId) {
+    return await httpService.delete(`contact/${contactId}`)
 }
 
 async function save(contact) {
     if (contact._id) {
 
-        return await storageService.put(STORAGE_KEY, contact)
+        return await httpService.put(`contact/${contact._id}`, contact)
     } else {
-        return await storageService.post(STORAGE_KEY, contact)
+        return await httpService.post('contact', contact)
     }
 
 }

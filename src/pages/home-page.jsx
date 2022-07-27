@@ -1,15 +1,34 @@
-import { useEffect, useState } from "react"
-import { Link } from 'react-router-dom'
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { userService } from "../services/user.service";
+import { useNavigate } from 'react-router-dom'
 
 export const HomePage = () => {
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        onLoadUser()
+    }, [])
+
+    const onLoadUser = async () => {
+        const user = userService.getLoggedinUser() //paramsId
+        console.log(user)
+        if (user) {
+            navigate('/contact')
+        }
+    }
+
+
     return <section className="Home-page">
-        Home Page
         <div>
-            <Link to='/login' className="login" href="">Log in</Link>
+            <div>
+                <Link to='/login' className="login" href="">Log in</Link>
+            </div>
+
+            <div>
+                <Link to='/signup' className="signup" >Signup</Link>
+            </div>
         </div>
 
-        <div>
-            <Link to='/signup' className="signup" >Signup</Link>
-        </div>
     </section>
 }

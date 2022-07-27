@@ -11,25 +11,24 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { onLogin } from '../store/action/user.actions';
 // import { boardService } from '../services/board.service';
 
 const theme = createTheme();
-
-
-export function _Login({ onLogin }) {
+export function _Login() {
     let navigate = useNavigate()
+    const dispatch = useDispatch()
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const credentials = {
-            username: data.get('email'),
+            username: data.get('username'),
             password: data.get('password'),
         }
-        await onLogin(credentials)
+        await dispatch(onLogin(credentials))
         // const boards = await boardService.query()
-        // navigate(`/board/${boards[0]._id}`)
+        navigate('/contact')
     };
 
     return (
@@ -56,9 +55,9 @@ export function _Login({ onLogin }) {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            label="User Name"
+                            name="username"
+                            autoComplete="username"
                             autoFocus
                         />
                         <TextField

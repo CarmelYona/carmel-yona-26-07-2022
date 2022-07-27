@@ -12,19 +12,19 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { onSignup } from '../store/action/user.actions';
 // import { boardService } from '../services/board.service';
 const theme = createTheme();
 
-export function _Signup({ onSignup }) {
+export function _Signup() {
     const [user, setUser] = useState({})
+    const dispatch = useDispatch()
     let navigate = useNavigate()
 
     function handleSignOut() {
         setUser({})
         document.getElementById("signInDiv").hidden = false;
-
     }
 
     const handleSubmit = async (event) => {
@@ -32,16 +32,20 @@ export function _Signup({ onSignup }) {
         const data = new FormData(event.currentTarget);
         const fName = data.get('firstName')
         const lName = data.get('lastName')
+        const email = data.get('email')
         const user = {
-            username: data.get('email'),
+            username: fName,
             fullname: (fName + ' ' + lName),
             password: data.get('password'),
-            boards: []
+            email: email
         }
-        await onSignup(user)
+        const newUser = await dispatch(onSignup(user))
+        console.log(newUser)
         // const boards = await boardService.query()
-        // navigate(`/board/${boards[0]._id}`)
-    };
+        if (newUser) {
+            navigate('/contact')
+        }
+    }
 
 
     return (

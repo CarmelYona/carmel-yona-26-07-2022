@@ -1,4 +1,4 @@
-const gContacts = require('../data/contact.json')
+const gContacts = []
 export const storageService = {
     query,
     get,

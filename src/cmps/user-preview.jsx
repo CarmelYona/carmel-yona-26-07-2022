@@ -4,7 +4,7 @@ export function UserPreview({ user, onRemoveUser }) {
     return <section className="user-preview flex pad-10x ">
         <div className="user-info flex column">
             <NavLink to={`/user/chat/${user._id}`}>
-                <h3>{user.fullname}</h3>
+                <h3>{user.username}</h3>
                 <h6>{user.email}</h6>
             </NavLink>
         </div>

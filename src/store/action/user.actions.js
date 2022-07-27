@@ -43,6 +43,7 @@ export function onSignup(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)
+            user.messege = []
             dispatch({
                 type: 'SET_USER',
                 user
@@ -58,6 +59,7 @@ export function onAddUser(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.addUser(credentials)
+            user.messege = []
             dispatch({
                 type: 'ADD_USER',
                 user
@@ -72,6 +74,7 @@ export function onUpdateUser(user) {
     return async (dispatch) => {
         try {
             const updatedUser = await userService.update(user)
+            console.log(updatedUser)
             dispatch({
                 type: 'SET_USER',
                 user: updatedUser

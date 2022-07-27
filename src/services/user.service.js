@@ -20,7 +20,6 @@ window.us = userService
 async function getUsers() {
     const loggedinUser = getLoggedinUser()
     let users = await httpService.get(`user`)
-    console.log(users)
     users = users.filter(user => user._id !== loggedinUser._id)
     return users
 }

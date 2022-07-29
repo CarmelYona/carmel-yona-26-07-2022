@@ -1,0 +1,24 @@
+.home-page {
+    background-color: $clr4;
+    height: 100vh;
+    width: 100%;
+    color: $clr3;
+    justify-content: space-around;
+
+    .home-page-container {
+        margin-top: 50px;
+        height: 100%;
+
+        .headers-container {}
+
+        .p-container {
+            padding: 20px;
+        }
+
+        .action-container {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

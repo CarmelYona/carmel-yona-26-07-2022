@@ -3,11 +3,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: $clr2;
+  background-color: $clr7;
   border-radius: 4px;
 
-  h1 {
-    color: $clr1;
+  .header-wrapper {
+
+
+    h1 {
+      color: $clr6;
+    }
   }
 
   .nav-links-wrapper {

@@ -1,35 +1,26 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom"
 import { userService } from "../services/user.service"
-import { loadUser } from "../store/action/user.actions"
-import { utilService } from "../services/util.service"
+import { onLogout } from '../store/action/user.actions'
 
 export const AppHeader = () => {
+    let { loggedInUser } = useSelector((storeState) => storeState.userModule)
     const dispatch = useDispatch()
-    let { user } = useSelector((storeState) => storeState.userModule)
-    useEffect(() => {
-        onLoadUser()
-    }, [])
-
-    const onLoadUser = async () => {
-        const user = userService.getLoggedinUser() //paramsId
-        if (user) {
-            await dispatch(loadUser(user._id))
-        }
+    const doLogout = async () => {
+        await dispatch(onLogout())
     }
 
     return <header className="app-header flex" >
-        <div className="flex">
-            {user ?
-                <div style={{ backgroundColor: utilService.getRandomColor() }} className="user-avatar flex justify-center">{user.fullname.charAt(0)}</div>
+        <div className="header-wrapper flex">
+            {loggedInUser ?
+                <div className="user-avatar flex justify-center">{loggedInUser.fullname.charAt(0)}</div>
                 :
                 <></>
             }
-            <h1>NetApp</h1>
+            <h1><img src="./src/img/send.png" /> NetApp</h1>
         </div>
         <nav className="nav-links-wrapper flex ">
-            {user && <Link to="/" onClick={userService.logout}>logout</Link>}
+            {loggedInUser && <Link to="/" onClick={doLogout}>logout</Link>}
         </nav>
     </header >
 }

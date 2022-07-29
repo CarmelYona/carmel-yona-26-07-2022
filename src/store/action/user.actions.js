@@ -1,11 +1,10 @@
 import { userService } from "../../services/user.service.js"
 
 
-export function loadUsers() {
+export function loadUsers(filterBy) {
     return async dispatch => {
         try {
-            dispatch({ type: 'LOADING_START' })
-            const users = await userService.getUsers()
+            const users = await userService.getUsers(filterBy)
             dispatch({ type: 'SET_USERS', users })
         } catch (err) {
             console.log('UserActions: err in loadUsers', err)
@@ -44,6 +43,7 @@ export function onSignup(credentials) {
         try {
             const user = await userService.signup(credentials)
             user.messege = []
+            user.friendslist = []
             dispatch({
                 type: 'SET_USER',
                 user
@@ -60,6 +60,7 @@ export function onAddUser(credentials) {
         try {
             const user = await userService.addUser(credentials)
             user.messege = []
+            user.friendslist = []
             dispatch({
                 type: 'ADD_USER',
                 user
@@ -74,7 +75,6 @@ export function onUpdateUser(user) {
     return async (dispatch) => {
         try {
             const updatedUser = await userService.update(user)
-            console.log(updatedUser)
             dispatch({
                 type: 'SET_USER',
                 user: updatedUser
@@ -82,7 +82,19 @@ export function onUpdateUser(user) {
         } catch (err) {
             console.log('Cannot update the user', err)
         }
-
+    }
+}
+export function onUpdatefriends(user) {
+    return async (dispatch) => {
+        try {
+            const updatedUser = await userService.updateFriends(user)
+            dispatch({
+                type: 'SET_USER',
+                user: updatedUser
+            })
+        } catch (err) {
+            console.log('Cannot update the user', err)
+        }
     }
 }
 

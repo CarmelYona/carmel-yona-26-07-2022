@@ -1,5 +1,13 @@
 .main-app {
-    .app-container {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+
+    .users-container {
         background-color: $clr2;
+        overflow: auto;
+        align-items: center;
+        width: 35%;
+        height: 100%;
     }
 }

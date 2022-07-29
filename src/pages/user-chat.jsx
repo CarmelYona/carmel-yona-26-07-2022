@@ -1,31 +1,34 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import { ChatList } from "../cmps/chat-list"
+import { socketService } from "../services/socket.service"
 import { userService } from "../services/user.service"
 import { loadUser, onUpdateUser } from "../store/action/user.actions"
 
 export const UserChat = () => {
     const params = useParams()
     const dispatch = useDispatch()
+    let { loggedInUser } = useSelector((storeState) => storeState.userModule)
     const [user, setUser] = useState(null)
-    const [loggedInUser, setLoggedInUser] = useState(null)
     const [emptyMsg, setEmptyMsg] = useState({ txt: '' })
     const [msgsToSHow, setMsgsToShow] = useState(null)
 
     useEffect(() => {
+        socketService.off('update user', onLoadUser)
+        socketService.on('update user', onLoadUser)
         onLoadUser()
-    }, [])
+        return (() => {
+            socketService.off('update user', onLoadUser)
+        })
+    }, [params._id])
 
 
     const onLoadUser = async () => {
         const { _id } = params
-        let loggedInUser = userService.getLoggedinUser()
-        loggedInUser = await dispatch(loadUser(loggedInUser._id))
-        const user = await dispatch(loadUser(_id))
+        const user = await userService.getById(_id)
         setUser(user)
-        setLoggedInUser(loggedInUser)
-        onSetMsgsToSHow(user, loggedInUser)
+        onFilterMsgs(user, loggedInUser)
     }
 
     const handelChange = ({ target }) => {
@@ -48,23 +51,17 @@ export const UserChat = () => {
             txt: emptyMsg.txt
         }
         onSendMsg(newMsg)
-        onSetMsgsToSHow(user, loggedInUser)
+        onFilterMsgs(user, loggedInUser)
     }
 
-    const onSetMsgsToSHow = (user, loggedInUser) => {
+    const onFilterMsgs = (user, loggedInUser) => {
         const msgs = user.messege.filter(msg => {
-            console.log('msg.by._id:', msg.by._id)
-            console.log('msg.to._id:', msg.to._id)
-            console.log('user._id:', user._id)
-            console.log('loggedInUser._id:', loggedInUser._id)
             if (msg.by._id === loggedInUser._id && msg.to._id === user._id ||
                 msg.by._id === user._id && msg.to._id === loggedInUser._id) {
-                console.log('in')
                 return msg
             }
         })
         setMsgsToShow(msgs)
-        console.log(msgs)
     }
 
     const onSendMsg = async (newMsg) => {

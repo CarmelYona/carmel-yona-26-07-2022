@@ -1,7 +1,11 @@
 .user-preview {
     background-color: $clr4;
     margin-top: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
+
+    &:hover {
+        background-color: $clr6;
+    }
 
     .user-action {
         height: 100%;

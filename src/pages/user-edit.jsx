@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { socketService } from "../services/socket.service"
 import { loadUser, onUpdateUser, onAddUser } from "../store/action/user.actions"
 
 export const UserEdit = () => {
@@ -10,8 +11,13 @@ export const UserEdit = () => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
+        socketService.off('update user', onLoadUser)
+        socketService.on('update user', onLoadUser)
         onLoadUser()
-    }, [])
+        return (() => {
+            socketService.off('update user', onLoadUser)
+        })
+    }, [params._id])
 
     const onLoadUser = async () => {
         const { _id } = params

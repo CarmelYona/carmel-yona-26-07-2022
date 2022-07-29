@@ -3,7 +3,7 @@ import { userService } from '../../services/user.service'
 
 
 const initialState = {
-    user: userService.getLoggedinUser(),
+    loggedInUser: userService.getLoggedinUser(),
     users: [],
 }
 
@@ -11,7 +11,7 @@ export function userReducer(state = initialState, action) {
     var newState = state
     switch (action.type) {
         case 'SET_USER':
-            newState = { ...state, user: action.user }
+            newState = { ...state, loggedInUser: action.user }
             break
         case 'REMOVE_USER':
             newState = {

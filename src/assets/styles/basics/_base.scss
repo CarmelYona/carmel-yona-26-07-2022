@@ -19,12 +19,7 @@ body {
     line-height: 1.5;
     width: 100%;
     height: 100%;
-    background-color: $clr5;
-}
-
-.root {
-    padding: 2rem;
-    height: 100vh;
+    background-color: #fff;
 }
 
 h1,
@@ -48,6 +43,7 @@ h2 {
     grid-area: title;
     color: $clr1;
     text-transform: uppercase;
+    @include type(boldCondensed);
 }
 
 h3 {
@@ -162,7 +158,7 @@ img {
     outline: none;
     border: none;
     height: auto;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     white-space: nowrap;
     transition: 50ms transform, .1scubic-bezier(0, 0, 0.35, 1) min-width;
@@ -174,12 +170,12 @@ img {
     user-select: none;
     --element-width: 32;
     --element-height: 32;
-
 }
 
 p {
     margin: 0 0 1em;
     max-width: 60ch;
+    @include type(light);
 
     .main-text & {
         grid-column: 3 / 6;
@@ -199,9 +195,15 @@ p {
             max-height: 42px;
             background-color: $clr1;
 
+            @include for-wide-layout {
+                width: 10px;
+            }
         }
 
-
+        @include for-wide-layout {
+            grid-column: 3 / 5;
+            font-size: rem(26px);
+        }
     }
 }
 
@@ -218,24 +220,22 @@ a {
     }
 }
 
-a {
+a,
+a:hover,
+a:focus,
+a:active {
     text-decoration: none;
-    color: $clr7;
-    transition: 0.4s;
-
-    &:hover {
-      color: $clr3;
-    }
-  }
+    color: inherit;
+}
 
 mark {
     color: $clr1;
     background-color: transparent;
 }
 
-// input {
-//     border: none;
-// }
+input {
+    border: none;
+}
 
 input:focus {
     outline: none;

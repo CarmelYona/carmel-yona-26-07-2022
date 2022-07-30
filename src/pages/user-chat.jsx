@@ -4,7 +4,8 @@ import { Link, useParams } from "react-router-dom"
 import { ChatList } from "../cmps/chat-list"
 import { socketService } from "../services/socket.service"
 import { userService } from "../services/user.service"
-import { loadUser, onUpdateUser } from "../store/action/user.actions"
+import { onUpdateFriendsAnMsg } from "../store/action/user.actions"
+import { BiSend } from 'react-icons/bi'
 
 export const UserChat = () => {
     const params = useParams()
@@ -67,24 +68,29 @@ export const UserChat = () => {
     const onSendMsg = async (newMsg) => {
         user.messege.push(newMsg)
         loggedInUser.messege.push(newMsg)
-        await dispatch(onUpdateUser(user))
-        await dispatch(onUpdateUser(loggedInUser))
         setEmptyMsg({ txt: '' })
+        await userService.updateFriendsAndMsg(user)
+        await dispatch(onUpdateFriendsAnMsg(loggedInUser))
     }
 
-    return <section className="user-chat flex column">
+    return <section className="user-chat flex column justify-center pad-10x">
+        <div className="user-char-container flex column justify-center pad-10x">
 
-        <div>{user?.fullname}</div>
-        <ChatList msgs={msgsToSHow} />
-
-        <form onSubmit={onSubmit}>
-            <div className="flex">
-                <input onChange={handelChange} type="text" name="txt" placeholder="Send" value={emptyMsg.txt} />
-                <button>{'>'}</button>
+            <div className="chat-header flex justify-center pad-10x">
+                <h1>{user?.fullname}</h1>
             </div>
-        </form>
+            <ChatList msgs={msgsToSHow} user={user} />
+            <footer className="flex column fustify-center pad10-x">
+                <form onSubmit={onSubmit}>
+                    <div className="flex">
+                        <input onChange={handelChange} type="text" name="txt" placeholder="Send" value={emptyMsg.txt} />
+                        <button className="flex justify-center"><BiSend /></button>
+                    </div>
+                </form>
+            </footer>
 
-        <Link to='/user'>Back</Link>
+            <Link to='/user'>Back</Link>
+        </div>
 
     </section >
 }

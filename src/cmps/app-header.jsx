@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom"
-import { userService } from "../services/user.service"
 import { onLogout } from '../store/action/user.actions'
+import { TbSend } from "react-icons/tb"
 
 export const AppHeader = () => {
     let { loggedInUser } = useSelector((storeState) => storeState.userModule)
@@ -12,14 +12,14 @@ export const AppHeader = () => {
 
     return <header className="app-header flex" >
         <div className="header-wrapper flex">
+            <h1>NetApp<span><TbSend /></span></h1>
+        </div>
+        <nav className="nav-links-wrapper flex ">
             {loggedInUser ?
-                <div className="user-avatar flex justify-center">{loggedInUser.fullname.charAt(0)}</div>
+                <div className="user-avatar flex justify-center">{loggedInUser.fullname}</div>
                 :
                 <></>
             }
-            <h1><img src="./src/img/send.png" /> NetApp</h1>
-        </div>
-        <nav className="nav-links-wrapper flex ">
             {loggedInUser && <Link to="/" onClick={doLogout}>logout</Link>}
         </nav>
     </header >

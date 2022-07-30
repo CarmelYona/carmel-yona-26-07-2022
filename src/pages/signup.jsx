@@ -14,7 +14,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 import { onSignup } from '../store/action/user.actions';
-// import { boardService } from '../services/board.service';
 const theme = createTheme();
 
 export function _Signup() {
@@ -41,7 +40,6 @@ export function _Signup() {
         }
         const newUser = await dispatch(onSignup(user))
         console.log(newUser)
-        // const boards = await boardService.query()
         if (newUser) {
             navigate('/user')
         }

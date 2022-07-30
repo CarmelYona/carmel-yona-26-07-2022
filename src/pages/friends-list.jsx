@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { loadUsers, removeUser, onUpdatefriends } from '../store/action/user.actions'
+import { loadUsers, removeUser, onUpdateFriendsAnMsg } from '../store/action/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserList } from '../cmps/user-list'
 import { Link } from 'react-router-dom'
@@ -17,6 +17,7 @@ export const FriendsList = () => {
         if (!loggedInUser) {
             navigate('/')
         }
+        onLoadUsers()
     }, [loggedInUser])
 
 
@@ -31,19 +32,19 @@ export const FriendsList = () => {
     const onRemoveFriend = async (userId) => {
         const idx = loggedInUser.friendslist.findIndex(friendId => friendId === userId)
         loggedInUser.friendslist.splice(idx, 1)
-        await dispatch(onUpdatefriends(loggedInUser))
+        await dispatch(onUpdateFriendsAnMsg(loggedInUser))
     }
 
     if (!users) return <div>loading...</div>
     return <section className="friends-list flex column pad-10x">
 
-        <div className="app-container flex column pad-10x">
+        <div className="users-container flex column pad-10x">
             <Link to="/users"><h1>Search Friends</h1></Link>
             {users ?
-                <div>
+                <>
                     <div> {users.length} Connections</div>
                     <UserList type="friends-list" users={users} onRemoveUser={onRemoveUser} onRemoveFriend={onRemoveFriend} />
-                </div>
+                </>
                 :
                 <div>No Friends Yet</div>
             }

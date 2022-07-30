@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 import { onLogin } from '../store/action/user.actions';
-// import { boardService } from '../services/board.service';
 
 const theme = createTheme();
 export function _Login() {
@@ -27,7 +26,6 @@ export function _Login() {
             password: data.get('password'),
         }
         await dispatch(onLogin(credentials))
-        // const boards = await boardService.query()
         navigate('/user')
     };
 

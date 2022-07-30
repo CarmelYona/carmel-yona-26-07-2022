@@ -1,14 +1,12 @@
 .app-header {
   height: 5vh;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 10px;
   background-color: $clr7;
   border-radius: 4px;
 
   .header-wrapper {
-
-
     h1 {
       color: $clr6;
     }
@@ -16,13 +14,22 @@
 
   .nav-links-wrapper {
     width: 35%;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-size: 0.893rem;
-  }
 
-  .user-avatar {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    a {
+      color: $clr6;
+      margin-left: 20px;
+      padding: 5px;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: rgb(167, 222, 167);
+      }
+    }
+
+    .user-avatar {
+      border-radius: 50%;
+    }
   }
 }

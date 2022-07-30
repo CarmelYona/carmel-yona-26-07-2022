@@ -1,0 +1,69 @@
+@media (max-width : 770px) {
+    .app-header {
+        justify-content: space-between;
+
+        .nav-links-wrapper {
+            width: 50%;
+        }
+    }
+
+    .friends-list {
+        .users-container {
+            width: 100%;
+        }
+    }
+
+    .main-app {
+        .users-container {
+            width: 100%;
+        }
+    }
+
+    .user-chat {
+        .user-char-container {
+            width: 100%;
+
+            @media (max-width : 550px) {
+
+                .chat-list {
+                    .chat-preview {
+                        .msg-wrapper {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .user-edit {
+        .user-edit-container {
+            .user-edit-header {
+                width: 100%;
+            }
+
+            .user-edit-body {
+
+                width: 100%;
+            }
+        }
+    }
+
+    .user-preview {
+        .user-info {
+            a {
+
+                h6 {
+                    font-size: 10px;
+                }
+            }
+
+
+            .user-action {
+                button {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

@@ -1,9 +1,22 @@
 // SETUP
+@import './setup/variables';
 
 // BASICS
+@import './basics/base';
+@import './basics/helpers';
 
 // PAGES
+@import './pages/main-app';
+@import './pages/home-page';
+@import './pages/friends-list';
+@import './pages/user-chat';
+@import './pages/user-edit';
+@import './pages/login-signup';
 
 // COMPONENTS
+@import './cmps/app-header';
+@import './cmps/user-list';
+@import './cmps/user-preview';
 
 // MQ
+@import './mq/mq.scss';

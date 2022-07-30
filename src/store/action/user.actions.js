@@ -84,10 +84,10 @@ export function onUpdateUser(user) {
         }
     }
 }
-export function onUpdatefriends(user) {
+export function onUpdateFriendsAnMsg(user) {
     return async (dispatch) => {
         try {
-            const updatedUser = await userService.updateFriends(user)
+            const updatedUser = await userService.updateFriendsAndMsg(user)
             dispatch({
                 type: 'SET_USER',
                 user: updatedUser

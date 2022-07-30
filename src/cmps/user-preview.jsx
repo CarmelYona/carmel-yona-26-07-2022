@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from "react-router-dom"
-
+import { BsTrash, BsPencil } from 'react-icons/bs'
 export const UserPreview = ({ user, onRemoveUser, type, onAddFriend, onRemoveFriend }) => {
     let { loggedInUser } = useSelector((storeState) => storeState.userModule)
 
@@ -13,24 +13,24 @@ export const UserPreview = ({ user, onRemoveUser, type, onAddFriend, onRemoveFri
             </NavLink>
         </div>
 
-        <div className="action-container flex column">
-            {loggedInUser?.isAdmin &&
-                <div className="user-action flex">
-                    <button onClick={() => onRemoveUser(user._id)} >X</button>
-                    <button  ><Link to={`/user/edit/${user._id}`}>Edit</Link> </button>
-                </div>
-            }
+        <div className="action-container flex ">
             <div className="user-action flex">
                 {type === 'unconnected' ?
                     <button onClick={() => onAddFriend(user._id)}>
-                        'Connect'
+                        Connect
                     </button>
                     :
                     <button onClick={() => onRemoveFriend(user._id)}>
-                        'disconnect'
+                        disconnect
                     </button>
                 }
             </div>
+            {loggedInUser?.isAdmin &&
+                <div className="admin-action flex">
+                    <button className="btn-trash flex justify-center" onClick={() => onRemoveUser(user._id)} ><BsTrash /></button>
+                    <button className="btn-edit flex justify-center" ><Link to={`/user/edit/${user._id}`}><BsPencil /></Link> </button>
+                </div>
+            }
         </div>
 
     </section>

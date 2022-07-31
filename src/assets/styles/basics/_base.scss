@@ -11,7 +11,28 @@ html {
     font-family: Roboto, sans-serif;
     line-height: 1.8;
     line-height: 1.5;
-    overflow: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px rgb(31, 31, 31);
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgb(92, 98, 89);
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #494949;
+    }
 }
 
 body {
